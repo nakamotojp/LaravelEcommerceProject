@@ -15,6 +15,7 @@ class HomeController extends Controller
             // motomoto001
     public function index()
     {
+            // motomoto001
         $usertype = Auth::user()->usertype;
         
         if($usertype == '1')

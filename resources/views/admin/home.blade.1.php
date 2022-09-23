@@ -1,5 +1,4 @@
 <x-app-layout>
-</x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,3 +28,4 @@
     <!-- End custom js for this page -->
   </body>
 </html>
+</x-app-layout>

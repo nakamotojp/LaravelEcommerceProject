@@ -150,22 +150,8 @@
                 </div>
               </li>
               <li>
-                        @if (Route::has('login'))
-                           @auth
-                              <li class="nav-item">
-                                 <a class="btn btn-warning" href="{{ route('login') }}" id="logincss">logout</a>
-                              </li>
-                           @else
-                              <li class="nav-item">
-                                 <a class="btn btn-primary" href="{{ route('login') }}" id="logincss">login</a>
-                              </li>
-                              @if (Route::has('register'))
-                                 <li class="nav-item">
-                                    <a class="btn btn-success" href="{{ route('register') }}">register</a>
-                                 </li>
-                              @endif
-                           @endauth
-                        @endif
+                    <x-app-layout>
+                    </x-app-layout>
               </li>
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">

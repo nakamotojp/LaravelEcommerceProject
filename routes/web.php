@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
             // motomoto001
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,10 @@ Route::middleware([
 });
             // motomoto001
 Route::get('/redirect', [HomeController::class, 'redirect']);
+
+Route::get('/view_category', [AdminController::class, 'view_category']);
+Route::post('/add_category', [AdminController::class, 'add_category']);
+
 
 Route::get('/welcome', function () {
     return view('welcome');
