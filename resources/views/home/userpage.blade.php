@@ -20,17 +20,18 @@
       <link href="home/css/style.css" rel="stylesheet" />
       <!-- responshome/ive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
+      <script src="https://cdn.tailwindcss.com"></script>
    </head>
    <body>
-      <div class="hero_area">
-        @include('home.header')
-        @include('home.slider')
-      </div>
-        @include('home.why')
-        @include('home.arrival')
+      <!--<div class="hero_area">-->
+      @include('home.header')
+        <!--include('home.slider')-->
+      <!--</div>-->
+        <!--include('home.why')-->
+        <!--include('home.arrival')-->
         @include('home.product')
-        @include('home.subscribe')
-        @include('home.client')
+        <!--include('home.subscribe')-->
+        <!--include('home.client')-->
         @include('home.footer')
 
       <div class="cpy_">

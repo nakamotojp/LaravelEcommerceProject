@@ -32,8 +32,9 @@
                         @if (Route::has('login'))
                            @auth
                               <li class="nav-item">
-                                 <a class="btn btn-warning" href="{{ route('login') }}" id="logincss">logout</a>
+                                   <x-app-layout></x-app-layout>
                               </li>
+
                            @else
                               <li class="nav-item">
                                  <a class="btn btn-primary" href="{{ route('login') }}" id="logincss">login</a>

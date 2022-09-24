@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
             // motomoto001
 use Illuminate\Support\Facades\Auth;
+
 use App\Models\User;
+
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -15,43 +18,22 @@ class HomeController extends Controller
             // motomoto001
     public function index()
     {
-            // motomoto001
-        if(Auth::user()->usertype)
-        {
-            $usertype = Auth::user()->usertype;
-            if($usertype == '1')
-            {
-                return view('admin.home');
-            }
-            else
-            {
-                return view('home.userpage');
-            }
-        }
-        else
-        {
-            return view('welcome');
-        }
+        $product = Product::paginate(3);
+        return view('home.userpage', compact('product'));
     }
 
     public function redirect()
     {
-            // motomoto001
-        if(Auth::user()->usertype)
+        // motomoto001
+        $usertype = Auth::user()->usertype;
+        if($usertype == '1')
         {
-            $usertype = Auth::user()->usertype;
-            if($usertype == '1')
-            {
-                return view('admin.home');
-            }
-            else
-            {
-                return view('home.userpage');
-            }
+            return view('admin.home');
         }
         else
         {
-            return view('welcome');
+            $product = Product::paginate(3);
+            return view('home.userpage', compact('product'));
         }
     }
 }
