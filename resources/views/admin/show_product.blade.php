@@ -72,7 +72,7 @@
               
                 <div class="div_center">
 
-                    <h1 class="font_size">Add product</h1>
+                    <h1 class="font_size">Show product</h1>
 
                     <table class="center">
                         <tr class="th_color">
@@ -83,6 +83,8 @@
                             <th class="th_deg">Price</th>
                             <th class="th_deg">Discount Price</th>
                             <th class="th_deg">Image</th>
+                            <th class="th_deg">Delete</th>
+                            <th class="th_deg">Edit</th>
                         </tr>
                         @foreach($product as $product)
                         <tr>
@@ -93,6 +95,8 @@
                             <td>{{$product->price}}</td>
                             <td>{{$product->dis_price}}</td>
                             <td><img class="img_size" src="/product/{{$product->image}}"></td>
+                            <td><a onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" href="{{url('delete_product',$product->id)}}">Delete</a></td>
+                            <td><a class="btn btn-success" href="{{url('update_product',$product->id)}}">Edit</a></td>
                         </tr>
                         @endforeach
                     </table>
