@@ -16,30 +16,42 @@ class HomeController extends Controller
     public function index()
     {
             // motomoto001
-        $usertype = Auth::user()->usertype;
-        
-        if($usertype == '1')
+        if(Auth::user()->usertype)
         {
-            return view('admin.home');
+            $usertype = Auth::user()->usertype;
+            if($usertype == '1')
+            {
+                return view('admin.home');
+            }
+            else
+            {
+                return view('home.userpage');
+            }
         }
         else
         {
-            return view('home.userpage');
+            return view('welcome');
         }
     }
 
     public function redirect()
     {
             // motomoto001
-        $usertype = Auth::user()->usertype;
-        
-        if($usertype == '1')
+        if(Auth::user()->usertype)
         {
-            return view('admin.home');
+            $usertype = Auth::user()->usertype;
+            if($usertype == '1')
+            {
+                return view('admin.home');
+            }
+            else
+            {
+                return view('home.userpage');
+            }
         }
         else
         {
-            return view('home.userpage');
+            return view('welcome');
         }
     }
 }

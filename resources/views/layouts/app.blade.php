@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
+        <!--<link rel="stylesheet" href="./css/app.css">-->
+        <!--<script src="./js/app.js"></script>-->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
