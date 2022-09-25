@@ -42,6 +42,7 @@ Route::get('/delete_product/{id}', [AdminController::class, 'delete_product']);
 Route::get('/update_product/{id}', [AdminController::class, 'update_product']);
 Route::POST('/update_product_confirm/{id}', [AdminController::class, 'update_product_confirm']);
 Route::get('/product_details/{id}', [HomeController::class, 'product_details']);
+Route::POST('/add_cart/{id}', [HomeController::class, 'add_cart']);
 
 Route::get('/welcome', function () {
     return view('welcome');

@@ -71,8 +71,17 @@
                      
                         <h6>カテゴリー:{{$product->category}}</h6>
                         <h6>商品説明:{{$product->description}}</h6>
-                        <h6>数量:{{$product->quantity}}</h6>
-                        <a href="" class="btn btn-primary">Add Cart</a>
+
+                        <form action="{{url('add_cart', $product->id)}}" method="POST">
+                        @csrf
+                                                      <div class="row">
+                              <div class="col-md-4">
+                                 <input type="number" name="quantity" value="1" min="1" style="width: 100px">
+                              </div>                                 
+                              <div class="col-md-4">
+                                 <input type="submit" value="Add To Cart">
+                              </div>
+                        </form>
                   </div>
                </div>
             </div>
