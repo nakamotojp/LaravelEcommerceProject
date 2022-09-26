@@ -13,6 +13,8 @@ use App\Models\Product;
 
 use App\Models\Cart;
 
+use App\Models\Order;
+
 class HomeController extends Controller
 {
     
@@ -101,7 +103,52 @@ class HomeController extends Controller
         $cart = cart::find($id);
         
         $cart->delete();
-        
+        flash('Remove Cart')->warning();
         return redirect()->back()->with('message','Product in Cart Deleted Successfully!');
+    }
+    
+    public function cash_order()
+    //     public function cash_order($id)
+    {
+        $user = Auth::user();
+        $userid = $user->id;
+        
+        $data = cart::where('user_id','=',$userid)->get();
+        
+        foreach($data as $data)
+        {
+            $order = new order;
+            
+            $order->name = $data->name;
+            $order->email = $data->email;
+            $order->phone = $data->phone;
+            $order->address = $data->address;
+            $order->user_id = $data->user_id;
+            $order->product_title = $data->product_title;
+            $order->price = $data->price;
+            
+            // if($data->discount_price != null)
+            // {
+            // $order->price = $data->discount_price * $request->quantity;                
+            // }
+            // else
+            // {
+            // $order->price = $data->price * $request->quantity;    ;                
+            // }
+
+            $order->image = $data->image;
+            $order->product_id = $data->product_id;
+            $order->quantity = $data->quantity;
+
+            $order->delivery_status = 'proceeding';
+            $order->payment_status = 'cash on delivery';            
+            $order->save();
+            
+            $cart_id = $data->id;
+            $cart = $data::find($cart_id);
+            $cart->delete();
+        }
+        flash('Order recieved!')->warning();
+        return redirect()->back()->with('message','We have recieved your Order');
     }
 }

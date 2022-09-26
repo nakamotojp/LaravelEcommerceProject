@@ -56,12 +56,13 @@
               <!-- product section -->
       <section class="product_section layout_padding">
          <div class="container">
-          @if(session()->has('message'))
+            @if(session()->has('message'))
             <div class="alert alert-success">
-              <button type="button" clase="close" data-dismiss="alert" aria-hidden="true">x</button>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
               {{session()->get('message')}}
             </div>
-          @endif
+            @include('flash::message')
+            @endif
             <div class="heading_container heading_center">
                <h2>
                   Cart</span>
@@ -92,6 +93,10 @@
                     <div class="total_deg">
                     Total: {{$totalprice}}円
                     </div>
+                    <h2>Proceed Order</h2>
+                    <div class="total_deg">
+                    <a href="{{url('/cash_order')}}" class="btn btn-danger">Cash</a>
+                    </div>                    
                </div>
             </div>
          </div>
