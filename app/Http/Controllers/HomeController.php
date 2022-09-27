@@ -35,7 +35,19 @@ class HomeController extends Controller
         $usertype = Auth::user()->usertype;
         if($usertype == '1')
         {
-            return view('admin.home');
+            $total_product = product::all()->count();
+            $total_order = order::all()->count();            
+            $total_user = user::all()->count();
+            $order = order::all();
+            $total_revenue=0;
+            foreach($order as $order)
+            {
+                $total_revenue = $total_revenue + $order->price;
+            }
+            $total_delivered = order::where('delivery_status','=','delivered')->get()->count();
+            $total_proceeding = order::where('delivery_status','=','proceeding')->get()->count();
+            
+            return view('admin.home', compact('total_product','total_order', 'total_user', 'total_revenue', 'total_delivered', 'total_proceeding'));
         }
         else
         {
@@ -55,8 +67,24 @@ class HomeController extends Controller
         if(Auth::id())
         {
             $user = Auth::user();
+            $userid = #user->id;
+            
             $product = product::find($id);
             
+            $product_exist_id = cart::where('product_id',$id)->where('user_id','=',$userid)->get('id')->first();
+            
+            
+            if($product_exist_id)
+            {
+            $cart = cart::find($product_exist_id);
+            $quantity = cart->quantity;
+            $cart->quantity = $quantity + $request->quantity;
+            $cart->save();
+            return redirect()->back()->with('message','product_exist_id Successfully!');
+            
+            }
+            else
+            {
             $cart = new cart;
             
             $cart->name = $user->name;
@@ -64,7 +92,10 @@ class HomeController extends Controller
             $cart->phone = $user->phone;
             $cart->address = $user->address;
             $cart->user_id = $user->id;
-            $cart->product_title = $product->title;
+            $cart->product_title = $product->title;                
+            }
+            
+
             
             if($product->discount_price != null)
             {
@@ -221,4 +252,41 @@ class HomeController extends Controller
         return back();
     }
     
+    public function product()
+    {
+        $product = Product::paginate(10);
+        dd($product);
+        $comment = comment::orderdby('id', 'desc')->get();
+        $reply = reply::all();
+        
+        return view('home.all_product', compact('product', 'comment', 'reply'));
+    }
+    
+    public function show_order()
+    {
+        if(Auth::id())
+        {
+            $user = Auth::user();
+            $userid = $user->id;
+            $order = order::where('user_id', '=', $userid)->get();
+            return view('home.order', compact('order'));
+        }
+        else
+        {
+            return redirect('login');
+        }
+
+        $order = orders::find($id);
+        
+    }
+    
+    public function cancel_order($id)
+    {
+        $order = order::find($id);
+        $order->delivery_status = 'Alredy Canceled Order';
+        $order->save();
+        
+        return redirect()->back();
+        
+    }
 }
