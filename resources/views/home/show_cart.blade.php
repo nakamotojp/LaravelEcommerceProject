@@ -96,6 +96,7 @@
                     <h2>Proceed Order</h2>
                     <div class="total_deg">
                     <a href="{{url('/cash_order')}}" class="btn btn-danger">Cash</a>
+                    <a href="{{url('/stripe',$totalprice)}}" class="btn btn-danger">Card</a>
                     </div>                    
                </div>
             </div>
