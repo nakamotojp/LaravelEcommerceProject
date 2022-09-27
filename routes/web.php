@@ -30,6 +30,7 @@ Route::middleware([
     })->name('dashboard');
 });
             // motomoto001
+// Route::get('/redirect', [HomeController::class, 'redirect'])->middleware('auth','verified');
 Route::get('/redirect', [HomeController::class, 'redirect']);
 
 Route::get('/view_category', [AdminController::class, 'view_category']);
