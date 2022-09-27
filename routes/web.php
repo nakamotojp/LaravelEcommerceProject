@@ -46,6 +46,9 @@ Route::POST('/update_product_confirm/{id}', [AdminController::class, 'update_pro
 Route::get('/order', [AdminController::class, 'order']);
 Route::get('/delivered/{id}', [AdminController::class, 'delivered']);
 Route::get('/print_pdf/{id}', [AdminController::class, 'print_pdf']);
+Route::get('/send_email/{id}', [AdminController::class, 'send_email']);
+Route::post('/send_email_user/{id}', [AdminController::class, 'send_email_user']);
+Route::get('/search', [AdminController::class, 'search']);
 
 
 

@@ -70,6 +70,17 @@
 
       <section class="order_section layout_padding">
          <div class="container">
+          <form action="{{url('search')}}" method="get"> 
+          @csrf
+           <div class="div_center text_color">
+             <form>
+               <input type="text" name="search" placeholder="search text">
+
+               <input type="submit" value="search" class="btn btn-outline-primary">
+             </form>
+          </form>   
+           </div>
+           
             @if(session()->has('message'))
             <div class="alert alert-success">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -96,9 +107,10 @@
                     <th class="th_deg">image</th>
                     <th class="th_deg">delivered</th>
                     <th class="th_deg">print pdf</th>
+                    <th class="th_deg">send_email</th>
                     </tr>
 
-                    @foreach($order as $orders)
+                    @forelse($order as $orders)
                     <tr>
                     <td>{{$orders->name}}</td> 
                     <td>{{$orders->email}}</td> 
@@ -122,9 +134,16 @@
 
                     @endif
                     <td><a href="{{url('/print_pdf', $orders->id,)}}" class="btn btn-secondary">PDF</a></td> 
+                    <td><a href="{{url('/send_email', $orders->id,)}}" class="btn btn-info">send_email</a></td>
+
+
                     </tr>
+                    @empty
+                    <div>
+                      <p>No Data</p>
+                    </div>
                     
-                    @endforeach
+                    @endforelse
                   </table>
                <div style="margin:auto; margin-top:20px;">{!!$order->links()!!}</div>
                  
