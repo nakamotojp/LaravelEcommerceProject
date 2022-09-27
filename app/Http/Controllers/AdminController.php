@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
+
 use App\Models\Product;
+
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -104,5 +107,33 @@ class AdminController extends Controller
         
         return redirect()->back()->with('message', 'Product Update Successfully!');
     }
+    
+    public function order()
+    {
+        $order = Order::paginate(10);
+        return view('admin.order', compact('order'));
+    }
+    
+    public function delivered($order)
+    {
+        $order = Order::find($order);
+        $order->delivery_status = 'delivered';
+        $order->payment_status = 'Paid';
+        $order->save();
+
+        return redirect()->back();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
