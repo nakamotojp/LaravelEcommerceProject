@@ -95,6 +95,7 @@
                     <th class="th_deg">delivery_status</th>
                     <th class="th_deg">image</th>
                     <th class="th_deg">delivered</th>
+                    <th class="th_deg">print pdf</th>
                     </tr>
 
                     @foreach($order as $orders)
@@ -117,9 +118,10 @@
 
                     @else
 
-                    <p>Deliverd</p>
+                    <td><p>Deliverd</p></td>
 
                     @endif
+                    <td><a href="{{url('/print_pdf', $orders->id,)}}" class="btn btn-secondary">PDF</a></td> 
                     </tr>
                     
                     @endforeach
