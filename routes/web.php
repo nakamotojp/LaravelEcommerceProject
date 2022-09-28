@@ -66,7 +66,7 @@ Route::get('/product', [HomeController::class, 'product']);
 Route::get('/show_order', [HomeController::class, 'show_order']);
 Route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
 Route::POST('/add_comment', [HomeController::class, 'add_comment']);
-Route::POST('/add_reply/{id}', [HomeController::class, 'add_reply']);
+Route::POST('/add_reply/', [HomeController::class, 'add_reply']);
 
 
 Route::get('/welcome', function () {

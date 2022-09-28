@@ -54,36 +54,7 @@
         <!--include('home.why')-->
         <!--include('home.arrival')-->
         @include('home.product')
-
-<div class="center">
-    <h2 class="text-xl">Comments</h2>
-    <form action="{{url('add_comment')}}" method="POST">
-        @csrf
-    <textarea style="width:500px,height:100px" name="comment"></textarea>
-    <br>
-    <input type="submit" class='btn btn-primary' value="comment">
-    </form>
-</div>
-
-<div class="center">
-    <h2 class="text-xl">All Comments</h2>
-    @foreach($comment as $comment)
-    {{$comment->name}}
-    <div>
-        <p>{{$comment->name}}</p>
-        <p>{{$comment->comment}}</p>
-        <a href="javascript::void(0);" onclick="reply(this)">Reply</a>
-    </div>
-    @endforeach
-    
-    <div style="display:none;" class="replyDiv">
-    <textarea style="width:500px,height:100px"></textarea>
-    <br>
-    <a href="" class='btn btn-primary'>comment</a>
-    </div>
-</div>
-        
-    //   @include('home.comment')
+        @include('home.comment')
         <!--include('home.subscribe')-->
         <!--include('home.client')-->
         @include('home.footer')
@@ -98,9 +69,24 @@
     <script type="text/javascript">
         function reply(caller)
         {
+            document.getElementById('commentId').value=$(caller).attr('data-Commentid');
             $('.replyDiv').insertAfter($(caller));
             $('.replyDiv').show();
         }
+        function reply_close(caller)
+        {
+            $('.replyDiv').hide();
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
     </script>
       <!-- jQery -->
       <!--<script src="home/js/jquery-3.4.1.min.js"></script>-->

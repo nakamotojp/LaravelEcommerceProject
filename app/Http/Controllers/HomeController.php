@@ -30,7 +30,11 @@ class HomeController extends Controller
     public function index()
     {
         $product = Product::paginate(3);
-        return view('home.userpage', compact('product'));
+        $comment = comment::orderby('id', 'desc')->get();
+        $reply = reply::all();
+        // dd($reply);
+        // dd($comment);
+        return view('home.userpage', compact('product', 'comment', 'reply'));
     }
 
     public function redirect()
@@ -56,8 +60,12 @@ class HomeController extends Controller
         else
         {
             $product = Product::paginate(3);
-            $comment = Comment::all();
-            return view('home.userpage', compact('product', 'comment'));
+            // $comment = Comment::all();
+            $comment = comment::orderby('id', 'desc')->get();
+            $reply = reply::all();
+            // dd($reply);
+            // dd($comment);
+            return view('home.userpage', compact('product', 'comment', 'reply'));
         }
     }
 
@@ -261,7 +269,7 @@ class HomeController extends Controller
     {
         $product = Product::paginate(10);
         dd($product);
-        $comment = comment::orderdby('id', 'desc')->get();
+        $comment = comment::orderby('id', 'desc')->get();
         $reply = reply::all();
         
         return view('home.all_product', compact('product', 'comment', 'reply'));
@@ -312,5 +320,22 @@ class HomeController extends Controller
         }
     }
 
+    public function add_reply(Request $request)
+    {
+        if(Auth::id())
+        {
+            $reply = new reply;
+            $reply->name = Auth::user()->name;
+            $reply->user_id = Auth::user()->id;
+            $reply->comment = $request->reply;
+            $reply->comment_id = $request->commentId;
+            $reply->save();
+            return redirect()->back();
+        }
+        else
+        {
+            redirect('login');
+        }
+    }
     
 }
